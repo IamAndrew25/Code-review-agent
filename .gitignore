@@ -1,0 +1,11 @@
+venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+.env
+target_project/*
+!target_project/
+!target_project/app.py
+target_project_example/
+Guia_entender_tu_agente.md
+Guia_entender_tu_agente.pdf
