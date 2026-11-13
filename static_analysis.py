@@ -12,7 +12,7 @@ def run_bandit(root, paths, timeout=60):
             continue
         target = Path(root, path).resolve()
         try:
-            proc = subprocess.run([sys.executable, '-m', 'bandit', '-f', 'json', '-q', '--ignore-nosec', str(target)],
+            proc = subprocess.run([sys.executable, '-I', '-m', 'bandit', '-f', 'json', '-q', '--ignore-nosec', str(target)],
                                   capture_output=True, text=True, timeout=timeout)
             if proc.returncode not in (0, 1):
                 raise ValueError(proc.stderr.strip() or 'Bandit failed')

@@ -14,7 +14,7 @@ Se implementaron y verificaron las cinco capacidades en la copia local del Code 
 
 | Prueba | Resultado |
 |---|---|
-| Pruebas automatizadas | 19/19 aprobadas, incluido Bandit real |
+| Pruebas automatizadas | 21/21 aprobadas, incluido Bandit real |
 | Casos aislados con modelo, sin Bandit | 10/10 aprobados |
 | Casos aislados con modelo y Bandit | 10/10 aprobados para los hallazgos del modelo |
 | Ejecución desde CLI y manejo de errores | 8/8 aprobados |
@@ -55,3 +55,12 @@ Bandit conserva advertencias que pueden ser falsos positivos: por ejemplo, emiti
 La cobertura complete se refiere al procesamiento del alcance seleccionado. Los fragmentos del mismo archivo aún se analizan por separado; el contexto relacionado es limitado y se documentan los truncamientos. Se excluyen carpetas generadas, Git y archivos .env; se registran los archivos ilegibles y los límites.
 
 Los resultados corresponden a la versión de código entregada con estas pruebas.
+
+## Revisión previa a la fusión
+
+Se reprodujeron dos errores con pruebas que fallaban antes de corregirlos:
+
+- La ejecución de `python -m bandit` podía cargar un módulo bandit.py de la carpeta actual o de PYTHONPATH. Ahora se usa `python -I -m bandit`, que aísla esa búsqueda. La prueba crea un módulo local inocuo y verifica que no se ejecute, y que el analizador instalado siga detectando B307.
+- Un enlace simbólico roto se clasificaba como eliminado al usar exists(). Ahora se usa lexists(): permanece en el alcance y se registra como enlace omitido, sin aparentar una revisión completa.
+
+Las 21 pruebas automatizadas pasaron después de estas correcciones.
