@@ -9,3 +9,21 @@ target_project/*
 target_project_example/
 Guia_entender_tu_agente.md
 Guia_entender_tu_agente.pdf
+
+# Local environments and secrets
+.venv/
+.env.*
+.pytest_cache/
+
+# Generated evaluation artifacts (recreate with the evaluation scripts)
+/benchmark-results.json
+/benchmark-bandit-results.json
+/cli-results.json
+/evaluation-results.json
+/project-evaluation-results.json
+/previous-new-case-results.json
+/new-case-results.json
+/example-report.md
+
+# Superseded local exploratory script
+/verify_new_cases.py
