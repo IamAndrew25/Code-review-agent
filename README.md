@@ -2,6 +2,17 @@
 
 Revisor de posibles problemas de seguridad con un modelo compatible con OpenAI y análisis independiente de Bandit para Python. No ejecuta el proyecto revisado. Los ejemplos vulnerables solo se leen.
 
+## Novedades de esta versión
+
+- Lectura por fragmentos para no descartar el final de archivos largos.
+- Contexto entre archivos Python y selección de archivos modificados en Git.
+- Reportes JSON o Markdown con evidencia verificable y gravedad estimada.
+- Integración con Bandit, ejecutado en modo aislado para evitar que un módulo local lo sustituya.
+- Cobertura explícita, manejo de errores y códigos de salida para revisiones incompletas.
+- Casos de regresión para código seguro, vulnerabilidades, enlaces simbólicos y proyectos de varios archivos.
+
+La verificación local registró **21 pruebas automatizadas aprobadas**, **8 comprobaciones de CLI**, **10 casos del modelo con Bandit y 10 sin Bandit**, y **8 comprobaciones entre archivos y Git**. También se comprobó la instalación desde cero y la ejecución en VS Code. Son resultados sobre los casos incluidos, no una garantía de detección universal. Consulta [los resultados y límites de la evaluación](TEST_RESULTS.md).
+
 ## Preparación
 
 ```bash
@@ -9,6 +20,8 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 ```
+
+En Visual Studio Code, abre esta carpeta y selecciona **Python: Select Interpreter → .venv** para que el editor y la terminal utilicen las dependencias del proyecto.
 
 Configura `OPENAI_BASE_URL`, `OPENAI_API_KEY` y `MODEL` según tu servidor. Por defecto usa `http://localhost:8080/v1` con `mlx-community/Qwen3.6-35B-A3B-4bit`. El código y el contexto seleccionado se envían al servidor configurado.
 
